@@ -84,11 +84,24 @@
     border: 2px solid #ffb300;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    display: none;
+    display: flex;
     flex-direction: column;
     overflow: hidden;
     font-family: sans-serif;
     z-index: 1000;
+    
+    /* Animación inicial */
+    transform: translateY(50px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s ease;
+  }
+
+  /* Estado visible con animación */
+  #chatbot-container.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
   }
 
   #chat-header {
@@ -100,6 +113,7 @@
   }
 
   #chat-body {
+    background: #1d0224;
     flex: 1;
     padding: 10px;
     overflow-y: auto;
@@ -119,7 +133,8 @@
   }
 
   .chat-message.user {
-    background: black;
+    background: rgb(232, 89, 0);
+    color: white;
     align-self: flex-end;
     margin-left: auto;
   }
@@ -158,8 +173,15 @@
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     z-index: 1001;
+    transition: transform 0.3s ease;
+  }
+
+  /* Animación del botón al presionar */
+  #chat-toggle:active {
+    transform: scale(0.9);
   }
 </style>
+
 
 <script>
   const chatToggle = document.getElementById('chat-toggle');
@@ -168,8 +190,9 @@
   const chatInput = document.getElementById('chat-input');
   const chatBody = document.getElementById('chat-body');
 
+  // Alternar visibilidad con animación
   chatToggle.addEventListener('click', () => {
-    chatContainer.style.display = chatContainer.style.display === 'flex' ? 'none' : 'flex';
+    chatContainer.classList.toggle('active');
   });
 
   chatSend.addEventListener('click', sendMessage);
@@ -199,4 +222,3 @@
 </script>
 </body>
 </html>
-
