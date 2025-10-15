@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Día de Muertos | Recetas Completas</title>
+    <style>
+        /* [Aquí iría todo el CSS que se generó previamente] */
+        :root {
+            /* Fondo Oscuro Elegante */
+            --bg: #100b08;            
+            --bg-2: #1e1610;          
+            
+            /* Texto y Tonalidades */
+            --text: #f5f0eb;          
+            --muted: #bfa89f;          
+            
+            /* Colores de Acento (Temas de Cocina) */
+            --accent-primary: #e67e22; /* Calabaza/Naranja Profundo (Acento Principal) */
+            --accent-secondary: #27ae60; /* Verde Hoja/Albahaca (para métricas positivas) */
+            --accent-tertiary: #c0392b; /* Rojo Pimiento/Pimentón (para alertas/métrica de alto impacto) */
+            
+            /* Efectos de Cristal y Sombras */
+            --glass: rgba(255, 255, 255, 0.08); 
+            --glass-strong: rgba(255, 255, 255, 0.15);
+            --shadow-xl: 0 15px 40px rgba(0, 0, 0, 0.7); 
+            
+            /* Bordes de Elementos de Dashboard */
+            --border-color: #2e2621; 
+        }
+
+        * { box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+            color: var(--text);
+            background: radial-gradient(1400px 900px at 75% -15%, var(--bg-2), var(--bg));
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .site-header {
+            position: sticky; top: 0; left: 0; right: 0; z-index: 50;
+            background: rgba(16, 11, 8, 0.9); backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav { max-width: 1400px; margin: 0 auto; padding: 18px 30px; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: Cinzel, serif; font-weight: 800; letter-spacing: 1px; color: var(--accent-primary); text-decoration: none; font-size: 24px; }
+        .nav-links { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; }
+        .nav-links a { color: var(--muted); text-decoration: none; padding: 10px 14px; border-radius: 8px; transition: all 0.3s ease; }
+        .nav-links a:hover { color: var(--text); background: var(--glass); border-bottom: 2px solid var(--accent-primary); }
+
+        .dashboard-container {
+            max-width: 1400px; margin: 40px auto 80px; padding: 20px;
+            /* Cambiado a 2 columnas para dar más espacio vertical a las recetas completas */
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); 
+            display: grid; 
+            gap: 30px;
+        }
+        .dashboard-widget {
+            background: var(--bg-2); border: 1px solid var(--border-color); border-radius: 16px;
+            padding: 25px; box-shadow: var(--shadow-xl); transition: transform 0.3s ease;
+        }
+        .dashboard-widget:hover { transform: none; border-color: var(--border-color); } /* Desactivar hover para la ficha de receta */
+        .widget-title { font-family: Cinzel, serif; font-size: 1.8rem; color: var(--accent-primary); margin-top: 0; margin-bottom: 15px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px; }
+        .widget-metric { font-size: 1.4rem; font-weight: 700; color: var(--text); margin: 5px 0 10px; }
+        .widget-subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; }
+        
+        .image-placeholder {
+            height: 200px; /* Aumentar el tamaño de la imagen */
+            border-radius: 8px; 
+            background: linear-gradient(135deg, #a14022, var(--accent-primary));
+            display: grid; 
+            place-items: center; 
+            color: var(--text);
+            font-size: 14px;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 20px;
+        }
+
+        /* Nuevos estilos para la receta */
+        .recipe-details h4 {
+            font-family: Cinzel, serif;
+            color: var(--accent-secondary);
+            margin-top: 25px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--accent-secondary);
+            padding-left: 10px;
+        }
+        .recipe-details ul, .recipe-details ol {
+            color: var(--muted);
+            padding-left: 20px;
+        }
+        .recipe-details li {
+            margin-bottom: 8px;
+            color: var(--muted);
+        }
+        .recipe-details p {
+            color: var(--text);
+        }
+
+        /* Eliminamos los estilos para botones ya que no se usarán */
+        .btn-recipe { display: none; }
+        .site-footer { text-align: center; color: var(--muted); padding: 60px 20px 40px; border-top: 1px solid var(--border-color); margin-top: 40px; }
+
+        @media (max-width: 960px) {
+            .dashboard-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <nav class="nav">
+            <a href="#" class="logo">RecetarIA</a>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+
+        <div class="dashboard-widget">
+            <h3 class="widget-title">Pan de Muerto 🍞</h3>
+            <div class="image-placeholder" style="background-image: url('pan_de_muerto_placeholder.jpg');">
+                <p style="background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 5px;">Pan de Naranja y Anís</p>
+            </div>
+            <p class="widget-subtitle">Representa el cráneo y los huesos de los difuntos. Es la ofrenda dulce más importante.</p>
+            
+            <div class="recipe-details">
+                <h4>Ingredientes</h4>
+                <ul>
+                    <li>500g de harina de trigo.</li>
+                    <li>150g de azúcar.</li>
+                    <li>150g de mantequilla sin sal.</li>
+                    <li>4 huevos.</li>
+                    <li>10g de levadura fresca.</li>
+                    <li>1/2 taza de leche tibia.</li>
+                    <li>Ralladura de 1 naranja y 1 cda. de agua de azahar.</li>
+                </ul>
+
+                <h4>Preparación</h4>
+                <ol>
+                    <li>**Activar la levadura:** Mezcla la levadura con un poco de leche tibia y una cucharada de azúcar. Deja reposar 10 minutos.</li>
+                    <li>**Amasado:** En un bol grande, mezcla la harina y el azúcar restante. Agrega la levadura activada, los huevos, la ralladura de naranja y el agua de azahar. Amasa.</li>
+                    <li>**Integrar grasa:** Añade la mantequilla poco a poco mientras sigues amasando hasta obtener una masa elástica. Deja reposar 1 hora.</li>
+                    <li>**Formar:** Separa una parte de la masa para los "huesitos". Forma una bola grande y decora con los huesos. Deja fermentar 1 hora más.</li>
+                    <li>**Hornear:** Barniza con huevo y hornea a 180°C por 25-30 minutos. Al salir, unta mantequilla derretida y espolvorea azúcar.</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="dashboard-widget">
+            <h3 class="widget-title">Mole Poblano 🌶️</h3>
+            <div class="image-placeholder" style="background-image: url('mole_poblano_placeholder.jpg'); background-color: #582f0c;">
+                <p style="background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 5px;">Mole con Pollo/Pavo</p>
+            </div>
+            <p class="widget-subtitle">Platillo de origen prehispánico y virreinal. Se ofrenda con pollo o pavo y es un símbolo de festividad.</p>
+
+            <div class="recipe-details">
+                <h4>Ingredientes</h4>
+                <ul>
+                    <li>1 pavo o pollo en piezas.</li>
+                    <li>250g de pasta de mole poblano.</li>
+                    <li>1 tableta de chocolate abuelita (o similar).</li>
+                    <li>1/4 de cebolla, 2 dientes de ajo.</li>
+                    <li>Caldo de pollo o pavo (aprox. 1 litro).</li>
+                    <li>Semillas de ajonjolí para decorar.</li>
+                </ul>
+
+                <h4>Preparación</h4>
+                <ol>
+                    <li>**Cocer carne:** Cocina el pollo/pavo con cebolla y ajo hasta que esté suave. Reserva el caldo y la carne.</li>
+                    <li>**Disolver mole:** En una cazuela grande, calienta un poco de aceite. Agrega la pasta de mole y fríe por unos minutos, moviendo constantemente.</li>
+                    <li>**Integrar:** Vierte el caldo de la carne poco a poco, batiendo para evitar grumos hasta que la salsa quede homogénea.</li>
+                    <li>**Sazonar:** Agrega la tableta de chocolate y deja que se disuelva. Prueba y ajusta de sal/azúcar al gusto.</li>
+                    <li>**Servir:** Añade las piezas de carne al mole y deja que se caliente por 10 minutos. Sirve caliente y decora con ajonjolí.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <h3 class="widget-title">Calabaza en Tacha 🎃</h3>
+            <div class="image-placeholder" style="background-image: url('calabaza_tacha_placeholder.jpg'); background-color: #d1751d;">
+                <p style="background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 5px;">Dulce de Piloncillo</p>
+            </div>
+            <p class="widget-subtitle">Su nombre viene de las "tachas" (calderas). Un dulce fácil, reconfortante y básico en la ofrenda.</p>
+            
+            <div class="recipe-details">
+                <h4>Ingredientes</h4>
+                <ul>
+                    <li>1.5 kg de calabaza de castilla (en trozos grandes).</li>
+                    <li>2 conos de piloncillo (o 300g de azúcar morena).</li>
+                    <li>4 tazas de agua.</li>
+                    <li>2 rajas grandes de canela.</li>
+                    <li>3 clavos de olor.</li>
+                </ul>
+
+                <h4>Preparación</h4>
+                <ol>
+                    <li>**Lavar y cortar:** Lava la calabaza y córtala en trozos grandes, dejando la cáscara.</li>
+                    <li>**Disolver:** En una olla grande, coloca el agua, el piloncillo, la canela y los clavos. Calienta a fuego medio hasta que el piloncillo se disuelva completamente, formando una miel ligera.</li>
+                    <li>**Cocción:** Coloca los trozos de calabaza en la miel con la cáscara hacia abajo.</li>
+                    <li>**Tapa:** Tapa la olla y deja cocer a fuego bajo por al menos 1 hora y 30 minutos, o hasta que la calabaza esté tierna y la miel se haya espesado.</li>
+                    <li>**Servir:** Se sirve bañada en la miel. Tradicionalmente se come con leche.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <h3 class="widget-title">Atole de Guayaba 🍶</h3>
+            <div class="image-placeholder" style="background-image: url('atole_guayaba_placeholder.jpg'); background-color: #9c2e64;">
+                <p style="background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 5px;">Bebida Reconfortante</p>
+            </div>
+            <p class="widget-subtitle">Bebida caliente y espesa a base de maíz (masa) y fruta. Esencial para recibir a las almas con una bebida caliente.</p>
+
+            <div class="recipe-details">
+                <h4>Ingredientes</h4>
+                <ul>
+                    <li>1 litro de leche.</li>
+                    <li>6 guayabas maduras.</li>
+                    <li>1/2 taza de masa de maíz (o 3 cdas. de Maizena).</li>
+                    <li>1/2 taza de azúcar (o piloncillo).</li>
+                    <li>1 raja de canela.</li>
+                </ul>
+
+                <h4>Preparación</h4>
+                <ol>
+                    <li>**Licuar guayabas:** Hierve las guayabas hasta que estén suaves. Licúalas con un poco de agua y cuela para quitar las semillas.</li>
+                    <li>**Disolver masa:** En un poco de leche fría, disuelve la masa de maíz o Maizena hasta que no haya grumos.</li>
+                    <li>**Hervir:** En una olla, pon a calentar el resto de la leche con el azúcar y la raja de canela. Cuando hierva, retira la canela.</li>
+                    <li>**Espesar:** Agrega la mezcla de masa disuelta y el puré de guayaba a la leche caliente.</li>
+                    <li>**Cocer:** Mueve constantemente a fuego bajo hasta que el atole espese. Sirve caliente.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="dashboard-widget" style="grid-column: 1 / -1;">
+            <h3 class="widget-title">Buscar Ingredientes o Platillos Típicos</h3>
+            <form action="#" method="GET" style="display: flex; gap: 10px; max-width: 800px; margin: 0 auto;">
+                <input 
+                    type="search" 
+                    placeholder="Ej: Mole Poblano, Atole de Guayaba, ingredientes para Tamales"
+                    style="flex-grow: 1; padding: 14px 20px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--glass); color: var(--text); font-size: 16px;">
+                
+                <button type="submit" style="padding: 14px 25px; display: none;">Buscar</button> 
+                </form>
+        </div>
+
+    </main>
+
+</body>
+</html>
