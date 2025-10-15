@@ -46,6 +46,7 @@
       <h2>La Tradición</h2>
       <p>Una mezcla de creencias ancestrales y costumbres actuales que celebran la memoria.</p>
     </section>
+
   </main>
 
   <footer id="contacto" class="site-footer">
@@ -56,6 +57,146 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+
+  <!-- Chatbot flotante -->
+<div id="chatbot-container">
+  <div id="chat-header">Chat con Nosotros 💬</div>
+  <div id="chat-body">
+    <div class="chat-message bot" style="color: black;">¡Hola! ¿En qué puedo ayudarte hoy?</div>
+  </div>
+  <div id="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Escribe un mensaje...">
+    <button id="chat-send">Enviar</button>
+  </div>
+</div>
+
+<button id="chat-toggle">💬</button>
+
+<style>
+  /* Estilos del chat flotante */
+  #chatbot-container {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    width: 300px;
+    height: 380px;
+    background: #fffdf9;
+    border: 2px solid #ffb300;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: sans-serif;
+    z-index: 1000;
+  }
+
+  #chat-header {
+    background: #ffb300;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+  }
+
+  #chat-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+  }
+
+  .chat-message {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    max-width: 80%;
+  }
+
+  .chat-message.bot {
+    color: black;
+    background: #ffecb3;
+    align-self: flex-start;
+  }
+
+  .chat-message.user {
+    background: black;
+    align-self: flex-end;
+    margin-left: auto;
+  }
+
+  #chat-input-area {
+    display: flex;
+    border-top: 1px solid #ccc;
+  }
+
+  #chat-input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    outline: none;
+  }
+
+  #chat-send {
+    background: #ffb300;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+
+  #chat-toggle {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #ffb300;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 1001;
+  }
+</style>
+
+<script>
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatContainer = document.getElementById('chatbot-container');
+  const chatSend = document.getElementById('chat-send');
+  const chatInput = document.getElementById('chat-input');
+  const chatBody = document.getElementById('chat-body');
+
+  chatToggle.addEventListener('click', () => {
+    chatContainer.style.display = chatContainer.style.display === 'flex' ? 'none' : 'flex';
+  });
+
+  chatSend.addEventListener('click', sendMessage);
+  chatInput.addEventListener('keypress', e => {
+    if (e.key === 'Enter') sendMessage();
+  });
+
+  function sendMessage() {
+    const msg = chatInput.value.trim();
+    if (!msg) return;
+    
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-message user';
+    userMsg.textContent = msg;
+    chatBody.appendChild(userMsg);
+    chatInput.value = '';
+
+    // Respuesta simulada
+    setTimeout(() => {
+      const botMsg = document.createElement('div');
+      botMsg.className = 'chat-message bot';
+      botMsg.textContent = "Gracias por tu mensaje 🌼";
+      chatBody.appendChild(botMsg);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }, 700);
+  }
+</script>
 </body>
 </html>
 
