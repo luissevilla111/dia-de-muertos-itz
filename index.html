@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Día de Muertos</title>
+<meta name="description" content="Landing page inspirada en el Día de Muertos en México.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./main.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="logo" href="#">Día de Muertos</a>
+      <ul class="nav-links">
+        <li><a href="#ofrenda">Ofrenda</a></li>
+        <li><a href="#tradicion">Tradición</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Héroe Día de Muertos">
+      <div class="hero-overlay"></div>
+      <canvas id="petals-canvas" aria-hidden="true"></canvas>
+      <div class="hero-content">
+        <h1 class="hero-title">Recordamos con Flores y Luz</h1>
+        <p class="hero-subtitle">Una celebración de vida, color y memoria.</p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#ofrenda">Ver Ofrenda</a>
+          <a class="btn ghost" href="#tradicion">Conocer Tradición</a>
+        </div>
+      </div>
+      <div class="marigold-edge" aria-hidden="true"></div>
+    </section>
+
+    <section id="ofrenda" class="section">
+      <h2>La Ofrenda</h2>
+      <p>Elementos como cempasúchil, velas y pan de muerto guían y honran a quienes amamos.</p>
+    </section>
+
+    <section id="tradicion" class="section alt">
+      <h2>La Tradición</h2>
+      <p>Una mezcla de creencias ancestrales y costumbres actuales que celebran la memoria.</p>
+    </section>
+
+    <!-- 🌸 NUEVO CARRUSEL -->
+    <section id="galeria" class="section carousel-section">
+      <h2>Galería de Recuerdos</h2>
+      <div class="carousel">
+        <button class="carousel-btn prev">&#10094;</button>
+        <div class="carousel-track">
+          <img src="img/teodora.jpg" alt="Teodora">
+          <img src="img/calaveritas.jpg" alt="Catrina decorada con flores">
+          <img src="img/leyendas.jpg" alt="Velas encendidas en honor a los difunt">
+        </div>
+        <button class="carousel-btn next">&#10095;</button>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacto" class="site-footer">
+    <p>Hecho con cariño en México · © <span id="year"></span></p>
+  </footer>
+
+  <script src="./main.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
