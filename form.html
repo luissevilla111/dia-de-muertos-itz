@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking de Pan de Muerto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1810 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+            border: 3px solid #ff8c00;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(255, 140, 0, 0.3);
+        }
+
+        h1 {
+            color: #ffa500;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.3);
+        }
+
+        .subtitle {
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .skull-divider {
+            text-align: center;
+            font-size: 2em;
+            margin: 20px 0;
+            color: #ff8c00;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #ffa500;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ff8c00;
+            border-radius: 8px;
+            background: #1a1a1a;
+            color: #ffd700;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+        }
+
+        .rating-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 5px;
+            font-size: 2em;
+        }
+
+        .star {
+            cursor: pointer;
+            color: #3a3a3a;
+            transition: color 0.2s;
+        }
+
+        .star.active {
+            color: #ffd700;
+        }
+
+        .star:hover {
+            color: #ffa500;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            color: #1a1a1a;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #ffa500, #ffd700);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 140, 0, 0.5);
+        }
+
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: #1a1a1a;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            display: none;
+            text-align: center;
+        }
+
+        .results h2 {
+            color: #ffa500;
+            margin-bottom: 15px;
+        }
+
+        .results p {
+            color: #ffd700;
+            margin: 8px 0;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            background: linear-gradient(135deg, #ff4500, #ff8c00);
+            color: #1a1a1a;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 1.1em;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #ffa500, #ffd700);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 140, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎃 Ranking de Pan de Muerto 💀</h1>
+        <p class="subtitle">Califica tu experiencia con este delicioso pan tradicional</p>
+        
+        <div class="skull-divider">☠ ✨ ☠</div>
+
+        <form id="panForm">
+            <div class="form-group">
+                <label for="panaderia">Nombre de la Panadería:</label>
+                <input type="text" id="panaderia" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sabor">Calificación de Sabor:</label>
+                <div class="star-rating" id="saborRating">
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+                </div>
+                <input type="hidden" id="sabor" required>
+            </div>
+
+            <div class="form-group">
+                <label for="textura">Calificación de Textura:</label>
+                <div class="star-rating" id="texturaRating">
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+                </div>
+                <input type="hidden" id="textura" required>
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Relación Calidad-Precio:</label>
+                <select id="precio" required>
+                    <option value="">Selecciona...</option>
+                    <option value="excelente">Excelente</option>
+                    <option value="bueno">Bueno</option>
+                    <option value="regular">Regular</option>
+                    <option value="malo">Malo</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="comentarios">Comentarios Adicionales:</label>
+                <textarea id="comentarios" placeholder="Cuéntanos tu experiencia..."></textarea>
+            </div>
+
+            <button type="submit">🎃 Enviar Ranking 🎃</button>
+        </form>
+
+        <div class="results" id="results">
+            <h2>¡Gracias por tu calificación! 💀</h2>
+            <p><strong>Panadería:</strong> <span id="resultPanaderia"></span></p>
+            <p><strong>Sabor:</strong> <span id="resultSabor"></span> ⭐</p>
+            <p><strong>Textura:</strong> <span id="resultTextura"></span> ⭐</p>
+            <p><strong>Precio:</strong> <span id="resultPrecio"></span></p>
+            <p><strong>Comentarios:</strong> <span id="resultComentarios"></span></p>
+            
+            <!-- NUEVO BOTÓN -->
+            <button class="back-btn" onclick="window.location.href='index.html'">⬅️ Regresar al Inicio</button>
+        </div>
+    </div>
+
+    <script>
+        // Star rating functionality
+        const starGroups = document.querySelectorAll('.star-rating');
+        
+        starGroups.forEach(group => {
+            const stars = group.querySelectorAll('.star');
+            const hiddenInput = group.nextElementSibling;
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = this.getAttribute('data-rating');
+                    hiddenInput.value = rating;
+                    
+                    stars.forEach(s => {
+                        if (s.getAttribute('data-rating') <= rating) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+
+        // Form submission
+        document.getElementById('panForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const sabor = document.getElementById('sabor').value;
+            const textura = document.getElementById('textura').value;
+            
+            if (!sabor || !textura) {
+                alert('Por favor califica el sabor y la textura con estrellas');
+                return;
+            }
+            
+            document.getElementById('resultPanaderia').textContent = document.getElementById('panaderia').value;
+            document.getElementById('resultSabor').textContent = sabor;
+            document.getElementById('resultTextura').textContent = textura;
+            document.getElementById('resultPrecio').textContent = document.getElementById('precio').value;
+            document.getElementById('resultComentarios').textContent = document.getElementById('comentarios').value || 'Sin comentarios';
+            
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
